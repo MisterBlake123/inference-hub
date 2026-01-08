@@ -13,7 +13,7 @@ const PORT = process.env.PORT || 3000;
 const GRPC_SERVER_URL = process.env.GRPC_SERVER_URL || 'localhost:50051';
 
 // Load Protobuf
-const PROTO_PATH = path.join(__dirname, '../proto/inference.proto');
+const PROTO_PATH = path.join(__dirname, 'proto/inference.proto');
 const packageDefinition = protoLoader.loadSync(PROTO_PATH, {
     keepCase: true,
     longs: String,
