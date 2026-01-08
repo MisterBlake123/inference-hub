@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  gateway:
+    build:
+      context: .
+      dockerfile: gateway/Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - PORT=3000
+      - GRPC_SERVER_URL=inference-service:50051
+    depends_on:
+      - inference-service
+    networks:
+      - mlops-network
+
+  inference-service:
+    build:
+      context: .
+      dockerfile: model_service/Dockerfile
+    ports:
+      - "50051:50051"
+    environment:
+      - PORT=50051
+    networks:
+      - mlops-network
+
+networks:
+  mlops-network:
+    driver: bridge

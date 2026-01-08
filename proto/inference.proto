@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package inference;
+
+// The Inference Service definition.
+service ModelInference {
+  // Performs a prediction based on input data
+  rpc Predict (PredictRequest) returns (PredictResponse) {}
+}
+
+// The request message containing the features to be processed.
+message PredictRequest {
+  repeated float features = 1;
+  string model_name = 2;
+}
+
+// The response message containing the prediction result.
+message PredictResponse {
+  int32 class_id = 1;
+  float confidence = 2;
+  string error = 3;
+}
