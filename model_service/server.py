@@ -1,9 +1,9 @@
 import grpc
 from concurrent import futures
 import time
-import numpy as np
 import os
 import sys
+import numpy as np
 
 # Add current directory to path so generated modules can be found
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
@@ -20,20 +20,44 @@ except ImportError:
 class InferenceService(inference_pb2_grpc.ModelInferenceServicer):
     def Predict(self, request, context):
         model_name = request.model_name or "unknown"
-        print(f"[Inference] 🧠 Received request for model: {model_name}")
-        print(f"[Inference] 🔢 Features received: {len(request.features)}")
+        prompt = request.prompt
+        
+        print(f"[Inference] 🧠 Request: Model={model_name}")
         
         start_time = time.time()
         
         # ---------------------------------------------------------
-        # THE MOCK "HEAVY" COMPUTE
-        # Simulating a large Matrix Multiplication or Transformer Forward Pass
+        # LOCAL INFERENCE: Rule-based Sentiment Analysis (Mock)
         # ---------------------------------------------------------
-        time.sleep(0.5) # 500ms Latency Simulation
-        
-        # Mock logic
-        class_id = int(np.random.randint(0, 5))
-        confidence = float(np.random.uniform(0.85, 0.99))
+        if prompt:
+            print(f"[Inference] 🔍 Analyzing Text Locally: '{prompt}'")
+            time.sleep(0.2) # Simulate compute time
+            
+            prompt_lower = prompt.lower()
+            positive_words = ['good', 'happy', 'love', 'amazing', 'best', 'great', 'awesome']
+            negative_words = ['bad', 'sad', 'hate', 'terrible', 'worst', 'poor', 'disappointed']
+            
+            if any(word in prompt_lower for word in positive_words):
+                class_id = 1 # Positive
+                confidence = float(np.random.uniform(0.90, 0.99))
+            elif any(word in prompt_lower for word in negative_words):
+                class_id = 0 # Negative
+                confidence = float(np.random.uniform(0.85, 0.95))
+            else:
+                class_id = 2 # Neutral
+                confidence = float(np.random.uniform(0.70, 0.85))
+                
+            print(f"[Inference] Result: Class={class_id}, Confidence={confidence:.4f}")
+
+        else:
+            # ---------------------------------------------------------
+            # MOCK COMPUTE (Fallback for Numeric Features)
+            # ---------------------------------------------------------
+            print(f"[Inference] 🎲 Using Mock Inference (Numeric)")
+            time.sleep(0.5) # 500ms Latency Simulation
+            
+            class_id = int(np.random.randint(0, 3))
+            confidence = float(np.random.uniform(0.85, 0.99))
         
         elapsed = time.time() - start_time
         print(f"[Inference] ✅ Processed in {elapsed:.4f}s")

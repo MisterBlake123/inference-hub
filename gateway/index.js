@@ -3,7 +3,6 @@ const grpc = require('@grpc/grpc-js');
 const protoLoader = require('@grpc/proto-loader');
 const path = require('path');
 const cors = require('cors');
-require('dotenv').config();
 
 const app = express();
 app.use(express.json());
@@ -31,15 +30,17 @@ const client = new inferenceProto.ModelInference(
 
 // REST Endpoint
 app.post('/predict', (req, res) => {
-    const { features, model_name } = req.body;
+    const { features, model_name, prompt } = req.body;
 
-    if (!features || !Array.isArray(features)) {
-        return res.status(400).json({ error: 'Features must be an array of numbers' });
+    // Allow prompt-only requests (for NLP) OR feature requests
+    if ((!features || !Array.isArray(features)) && !prompt) {
+        return res.status(400).json({ error: 'Must provide either "features" (array) or "prompt" (string)' });
     }
 
     const payload = {
-        features: features,
-        model_name: model_name || 'default-model'
+        features: features || [],
+        model_name: model_name || 'default-model',
+        prompt: prompt || ''
     };
 
     console.log(`[Gateway] Forwarding request to gRPC Service at ${GRPC_SERVER_URL}...`);
@@ -55,6 +56,17 @@ app.post('/predict', (req, res) => {
 
 app.get('/health', (req, res) => {
     res.json({ status: 'Gateway is running', grpc_target: GRPC_SERVER_URL });
+});
+
+app.get('/', (req, res) => {
+    res.json({
+        message: 'Inference Hub Gateway is running',
+        endpoints: {
+            health: '/health',
+            predict: '/predict (POST)'
+        },
+        frontend: 'http://localhost:5173'
+    });
 });
 
 app.listen(PORT, () => {
