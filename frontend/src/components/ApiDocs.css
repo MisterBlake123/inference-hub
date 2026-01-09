@@ -1,0 +1,138 @@
+.api-docs-section {
+    padding-top: var(--spacing-2xl);
+    margin-top: var(--spacing-xl);
+    border-top: 1px dashed var(--border);
+}
+
+.docs-header {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-md);
+}
+
+.docs-header h2 {
+    margin: 0;
+    font-size: 2rem;
+}
+
+.docs-intro {
+    margin-bottom: var(--spacing-xl);
+    max-width: 800px;
+    font-size: 1.1rem;
+}
+
+.docs-card {
+    position: relative;
+    overflow: visible;
+}
+
+.endpoint-badge {
+    position: absolute;
+    top: -12px;
+    right: var(--spacing-lg);
+    padding: 4px 12px;
+    border-radius: var(--radius-md);
+    font-weight: 700;
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+    box-shadow: var(--shadow-sm);
+    z-index: 1;
+}
+
+.badge-post {
+    background: var(--success);
+    color: white;
+}
+
+.badge-get {
+    background: var(--primary);
+    color: white;
+}
+
+.endpoint-title {
+    font-family: 'Courier New', monospace;
+    font-size: 1.5rem;
+    margin-bottom: var(--spacing-xs);
+    color: var(--text-primary);
+}
+
+.endpoint-desc {
+    color: var(--text-secondary);
+    margin-bottom: var(--spacing-lg);
+}
+
+/* Code Blocks */
+.code-block-container {
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    background: #1e293b;
+    /* Slate 800 */
+}
+
+.code-header {
+    padding: var(--spacing-xs) var(--spacing-md);
+    background: #0f172a;
+    /* Slate 900 */
+    color: #94a3b8;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    border-bottom: 1px solid #334155;
+}
+
+.code-content {
+    position: relative;
+    padding: var(--spacing-md);
+}
+
+.code-content pre {
+    margin: 0;
+    font-family: 'Courier New', monospace;
+    color: #e2e8f0;
+    font-size: 0.875rem;
+    white-space: pre-wrap;
+    word-break: break-all;
+}
+
+.copy-btn {
+    position: absolute;
+    top: var(--spacing-xs);
+    right: var(--spacing-xs);
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    color: #94a3b8;
+    padding: 6px;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.copy-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+}
+
+/* gRPC Info */
+.grpc-info-card {
+    background: linear-gradient(135deg, #fff 0%, #f8fafc 100%);
+}
+
+.grpc-header {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-md);
+}
+
+@media (max-width: 768px) {
+    .endpoint-badge {
+        position: static;
+        display: inline-block;
+        margin-bottom: var(--spacing-xs);
+    }
+}
