@@ -10,7 +10,7 @@ InferenceHub is a production-grade MLOps architecture that demonstrates **decoup
 
 ### The Decoupling Problem
 
-In monolithic AI applications (like Project 15 - DocMind), the AI logic and API exist in the same process:
+In monolithic AI applications, the AI logic and API exist in the same process:
 
 **Problems:**
 - 🔴 **Blocking**: If AI inference takes 500ms, the API is blocked
@@ -47,9 +47,9 @@ In monolithic AI applications (like Project 15 - DocMind), the AI logic and API 
 - **Port**: 50051 (gRPC)
 - **Responsibilities**:
   - Receive gRPC prediction requests
-  - Simulate heavy AI computation (500ms latency)
+  - **Text**: Execute local rule-based sentiment analysis
+  - **Numeric**: Simulate heavy AI computation (500ms latency)
   - Return structured predictions
-  - Handle model loading (future)
 
 **Key Files:**
 - `model_service/server.py` - gRPC server implementation
@@ -232,7 +232,7 @@ networks:
 - **Runtime**: Node.js 18
 - **Framework**: Express.js
 - **gRPC Client**: `@grpc/grpc-js`, `@grpc/proto-loader`
-- **Utilities**: `dotenv`, `cors`
+- **Utilities**: `cors`
 
 ### Inference Service
 - **Runtime**: Python 3.9

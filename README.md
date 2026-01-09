@@ -28,9 +28,11 @@
 
 ## 🎯 Overview
 
-**InferenceHub** is an MLOps architecture that solves the "monolithic AI application" problem by decoupling the **API Gateway** from the **AI Inference Service** using **gRPC** (Google Remote Procedure Call).
+**InferenceHub** is a clean, dependency-free MLOps architecture that demonstrates **decoupled AI inference** using **gRPC**.
 
-This design is used by companies like **Netflix**, **Uber**, and **Google** to handle millions of AI predictions per second.
+It solves the "monolithic AI application" problem by decoupling the **API Gateway** from the **AI Inference Service**. This project is a **standalone demo** that runs 100% locally with no external API keys required.
+
+![Application UI](docs/assets/ui_preview.png)
 
 ![Architecture Overview](docs/assets/architecture_diagram.png)
 
@@ -38,22 +40,21 @@ This design is used by companies like **Netflix**, **Uber**, and **Google** to h
 
 ## 🔴 The Problem
 
-In traditional AI applications (e.g., Project 15 - DocMind), the AI logic and API exist in the **same Python file**:
+In traditional AI applications (e.g., simple Flask apps), the AI logic and API exist in the **same process**:
 
 ```python
 # ❌ Monolithic Approach
 @app.route('/predict')
 def predict():
-    result = heavy_model.predict(data)  # Blocks for 500ms
+    # If this takes 500ms, the entire API is blocked!
+    result = heavy_model.predict(data)
     return jsonify(result)
 ```
 
 **Issues:**
-1. 🐢 **Blocking**: If the model takes 500ms, the API is blocked
-2. 💥 **Single Point of Failure**: If the model crashes, the entire API goes down
-3. 📈 **No Independent Scaling**: Can't scale model compute separately from API traffic
-
-![gRPC vs REST](docs/assets/grpc_vs_rest.png)
+1. 🐢 **Blocking**: Long compute times freeze your API.
+2. 💥 **Single Point of Failure**: If the model crashes, the API goes down.
+3. 📈 **No Independent Scaling**: You can't scale heavy GPU workers separately from lightweight API servers.
 
 ---
 
@@ -61,23 +62,14 @@ def predict():
 
 **Decoupled Microservices Architecture:**
 
-1. **Service A (Gateway)**: Fast Node.js API handling auth, validation, and routing
-2. **Service B (Inference)**: Heavy Python worker running AI computations
-3. **Communication**: gRPC (10x faster than REST, with strict type safety)
+1. **Service A (Gateway)**: Fast Node.js API handling auth, validation, and routing.
+2. **Service B (Inference)**: Python worker simulating heavy AI computations.
+3. **Communication**: gRPC (High-performance binary protocol).
 
-### Request Flow
-
-![Request Flow](docs/assets/request_flow_diagram.png)
-
-1. Client sends HTTP POST to Gateway
-2. Gateway validates and forwards via gRPC
-3. Inference Service processes (500ms simulation)
-4. Gateway receives result and returns JSON to client
-
-**Benefits:**
-- ✅ **Non-Blocking**: API stays responsive even during long computations
-- ✅ **Fault Isolation**: Model crashes don't affect the API
-- ✅ **Independent Scaling**: Scale inference workers separately from API servers
+### Hybrid Inference Engine
+The service uses a smart hybrid approach for demonstration:
+*   **Text Input**: Uses a **Local Rule-Based Engine** to analyze sentiment (Positive/Negative/Neutral) instantly.
+*   **Numeric Input**: Uses a **Mock Random Forest** model with simulated latency (500ms) to mimic real-world load.
 
 ---
 
@@ -85,14 +77,12 @@ def predict():
 
 ### System Components
 
-![Docker Setup](docs/assets/docker_setup_diagram.png)
-
-| Component             | Technology        | Port  | Responsibility                         |
-| --------------------- | ----------------- | ----- | -------------------------------------- |
-| **Gateway**           | Node.js + Express | 3000  | HTTP API, Validation, gRPC Client      |
-| **Inference Service** | Python + gRPC     | 50051 | Model Loading, Prediction (500ms mock) |
-| **Protocol**          | gRPC (Protobuf)   | -     | High-performance binary communication  |
-| **Orchestration**     | Docker Compose    | -     | Container management and networking    |
+| Component             | Technology        | Port  | Responsibility                        |
+| --------------------- | ----------------- | ----- | ------------------------------------- |
+| **Gateway**           | Node.js + Express | 3000  | HTTP API, Validation, gRPC Client     |
+| **Inference Service** | Python + gRPC     | 50051 | Hybrid Mock Inference (Text/Numeric)  |
+| **Protocol**          | gRPC (Protobuf)   | -     | High-performance binary communication |
+| **Orchestration**     | Docker Compose    | -     | Container management and networking   |
 
 ### Communication Protocol
 
@@ -106,6 +96,7 @@ service ModelInference {
 message PredictRequest {
   repeated float features = 1;
   string model_name = 2;
+  string prompt = 3;  // Added for Text Analysis
 }
 
 message PredictResponse {
@@ -120,19 +111,19 @@ message PredictResponse {
 ## 🚀 Key Features
 
 ### ✨ Production-Ready Architecture
-- **Decoupled Services**: Gateway and Inference run independently
-- **gRPC Communication**: 10x faster than REST, with type safety
-- **Docker Orchestration**: One command to run the entire stack
+- **Decoupled Services**: Gateway and Inference run independently.
+- **gRPC Communication**: 10x faster than REST, with strict type safety.
+- **Docker Orchestration**: One command to run the entire stack.
 
-### 🧠 Mock Inference Engine
-- **No GPU Required**: Runs on CPU (940MX compatible)
-- **Realistic Latency**: Simulates 500ms model inference
-- **Random Predictions**: class_id (0-4) with confidence (0.85-0.99)
+### 🧠 Standalone Hybrid Logic
+- **Sentiment Analysis**: Local rule-based NLP (Good="Positive", Bad="Negative").
+- **Mock Latency**: Simulates realistic 500ms blocking compute for numeric tasks.
+- **Zero Dependencies**: No OpenAI keys or external accounts needed!
 
 ### 🔧 Developer-Friendly
-- **Easy Setup**: `docker-compose up --build`
-- **Hot Reload**: Modify code and rebuild instantly
-- **Comprehensive Logs**: See requests flow through the system
+- **Easy Setup**: `docker-compose up --build`.
+- **Hot Reload**: Modify code and rebuild instantly.
+- **Comprehensive Logs**: See requests flow through the system.
 
 ---
 
@@ -145,7 +136,6 @@ message PredictResponse {
   - `@grpc/grpc-js` - gRPC client
   - `@grpc/proto-loader` - Protobuf loader
   - `cors` - Cross-origin resource sharing
-  - `dotenv` - Environment variables
 
 ### Inference Service
 - **Runtime**: Python 3.9
@@ -391,4 +381,4 @@ This project is open-source and available under the MIT License.
 
 ---
 
-**Built with ❤️ to demonstrate production-grade MLOps architecture**
+**Built with ❤️ by Harshan Aiyappa to demonstrate production-grade MLOps architecture**
