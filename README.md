@@ -38,33 +38,23 @@ It solves the "monolithic AI application" problem by decoupling the **API Gatewa
 
 ---
 
-## 🔴 The Problem
+## The Problem
 
-In traditional AI applications (e.g., simple Flask apps), the AI logic and API exist in the **same process**:
-
-```python
-# ❌ Monolithic Approach
-@app.route('/predict')
-def predict():
-    # If this takes 500ms, the entire API is blocked!
-    result = heavy_model.predict(data)
-    return jsonify(result)
-```
-
-**Issues:**
-1. 🐢 **Blocking**: Long compute times freeze your API.
-2. 💥 **Single Point of Failure**: If the model crashes, the API goes down.
-3. 📈 **No Independent Scaling**: You can't scale heavy GPU workers separately from lightweight API servers.
+> [!WARNING]  
+> **Monolithic AI Architectures have critical flaws:**
+> 1. **Blocking**: Long compute times freeze the API (e.g., a 500ms model blocks all traffic).
+> 2. **Single Point of Failure**: If the model crashes, the entire API goes down.
+> 3. **No Independent Scaling**: You cannot scale heavy GPU workers separately from lightweight API servers.
 
 ---
 
-## ✅ The Solution
+## The Solution
 
-**Decoupled Microservices Architecture:**
-
-1. **Service A (Gateway)**: Fast Node.js API handling auth, validation, and routing.
-2. **Service B (Inference)**: Python worker simulating heavy AI computations.
-3. **Communication**: gRPC (High-performance binary protocol).
+> [!TIP]  
+> **Decoupled Microservices Architecture:**
+> *   **Gateway**: Fast Node.js API handling auth, validation, and routing.
+> *   **Inference**: Python worker simulating heavy AI computations.
+> *   **Protocol**: gRPC (10x faster than REST).
 
 ### Hybrid Inference Engine
 The service uses a smart hybrid approach for demonstration:
@@ -129,26 +119,15 @@ message PredictResponse {
 
 ## 🛠 Tech Stack
 
-### Gateway Service
-- **Runtime**: Node.js 18
-- **Framework**: Express.js
-- **Dependencies**:
-  - `@grpc/grpc-js` - gRPC client
-  - `@grpc/proto-loader` - Protobuf loader
-  - `cors` - Cross-origin resource sharing
-
-### Inference Service
-- **Runtime**: Python 3.9
-- **Framework**: gRPC Server
-- **Dependencies**:
-  - `grpcio` - gRPC server
-  - `grpcio-tools` - Protobuf compiler
-  - `numpy` - Numerical computations
-
-### DevOps
-- **Containerization**: Docker
-- **Orchestration**: Docker Compose
-- **Networking**: Bridge network (`mlops-network`)
+<div align="center">
+  <img src="https://skillicons.dev/icons?i=react,vite,nodejs,express,python,docker,git,vscode" />
+  <br>
+  <br>
+  <b>Frontend:</b> React, Vite, Lucide &nbsp;|&nbsp; 
+  <b>Gateway:</b> Node.js, Express &nbsp;|&nbsp; 
+  <b>Inference:</b> Python, gRPC, NumPy &nbsp;|&nbsp; 
+  <b>DevOps:</b> Docker, Docker Compose
+</div>
 
 ---
 
