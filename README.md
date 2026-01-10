@@ -34,7 +34,7 @@ It solves the "monolithic AI application" problem by decoupling the **API Gatewa
 
 ![Application UI](docs/assets/ui_preview.png)
 
-![Architecture Overview](docs/assets/architecture_diagram.png)
+![Architecture Overview](docs/assets/architecture.png)
 
 ---
 
