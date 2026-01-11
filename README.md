@@ -279,50 +279,6 @@ All diagrams are available in `docs/assets/`:
 
 ---
 
-## 💼 Why This Matters
-
-### Resume Value
-
-This project demonstrates:
-1. ✅ **gRPC Microservices** - Industry-standard for high-performance systems
-2. ✅ **Decoupled Architecture** - Fault isolation and independent scaling
-3. ✅ **MLOps Patterns** - Separating model compute from API gateway
-4. ✅ **Docker Orchestration** - Container-based deployments
-5. ✅ **Protocol Buffers** - Efficient binary serialization
-
-### Real-World Applications
-
-Companies using this architecture:
-- **Netflix**: Microservices for recommendation engine
-- **Uber**: Real-time pricing and routing
-- **Google**: Internal service communication
-- **Spotify**: Music recommendation system
-
-### The Hardware Pivot
-
-**Original Plan**: Use NVIDIA Triton Inference Server (4GB Docker image)
-
-**Hardware Constraint**: Laptop GPU (940MX) cannot run Triton efficiently
-
-**Solution**: Mock inference service that:
-- Simulates 500ms latency (realistic for production)
-- Runs on CPU using NumPy
-- **Maintains identical architecture** to production Triton setup
-
-**Key Insight**: The architecture (Gateway + gRPC + Inference) is the same whether you use a mock service or NVIDIA Triton. Only the inference logic changes.
-
----
-
-## 🎓 Learning Outcomes
-
-After exploring this project, you will understand:
-
-1. **Why decouple services**: Fault isolation, independent scaling, polyglot architecture
-2. **How gRPC works**: Protobuf serialization, HTTP/2 transport, code generation
-3. **Docker networking**: Bridge networks, service discovery, port mapping
-4. **MLOps patterns**: Gateway-Inference separation, async vs sync prediction
-5. **Production considerations**: Health checks, logging, error handling
-
 ---
 
 ## 🚧 Future Enhancements
@@ -349,14 +305,6 @@ Contributions are welcome! Please:
 ## 📄 License
 
 This project is open-source and available under the MIT License.
-
----
-
-## 🙏 Acknowledgments
-
-- **gRPC Team** - For the incredible framework
-- **Docker** - For containerization made easy
-- **Protocol Buffers** - For efficient serialization
 
 ---
 
