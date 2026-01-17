@@ -1,4 +1,7 @@
 # InferenceHub
+
+![Thumbnail](docs/assets/thumbnail.png)
+
 ## Decoupled AI Inference Architecture
 
 <div align="center">
